@@ -27,7 +27,6 @@ void XetLienThong(GRAPH &g) {
     for (int i = 0; i < g.sodinh; i++)
         visited[i] = 0;
     nSoMienLienThong = 0;
-
     for (int i = 0; i < g.sodinh; i++)
         if (visited[i] == 0)
             visit(g, i, ++nSoMienLienThong);
@@ -39,29 +38,23 @@ void InRaFile(GRAPH g, const string &filename) {
         cout << "Khong mo duoc file de ghi!" << endl;
         return;
     }
-
     if (nSoMienLienThong == 1)
         fo << "LIEN THONG" << endl;
     else
         fo << "KHONG LIEN THONG" << endl;
-
     fo << nSoMienLienThong << endl;
-
     vector<vector<int>> thanhphan(nSoMienLienThong + 1);
     for (int i = 0; i < g.sodinh; i++)
         thanhphan[visited[i]].push_back(i);
-
     for (int i = 1; i <= nSoMienLienThong; i++) {
         for (int v : thanhphan[i])
             fo << v << " ";
         fo << endl;
     }
-
     if (nSoMienLienThong > 1) {
         int canThem = nSoMienLienThong - 1;
         fo << "Can them toi thieu " << canThem 
            << " canh de do thi lien thong." << endl;
-
         fo << "Cac canh can them: " << endl;
         for (int i = 1; i < nSoMienLienThong; i++) {
             int u = thanhphan[i][0];
@@ -69,7 +62,6 @@ void InRaFile(GRAPH g, const string &filename) {
             fo << "(" << u << ", " << v << ")" << endl;
         }
     }
-
     fo.close();
     cout << "Da ghi ket qua vao file '" << filename << "'." << endl;
 }
@@ -77,7 +69,6 @@ void InRaFile(GRAPH g, const string &filename) {
 void NhapMaTranKe(GRAPH &g) {
     cout << "Nhap so dinh: ";
     cin >> g.sodinh;
-
     cout << "Nhap ma tran ke (" << g.sodinh << "x" << g.sodinh << "):\n";
     for (int i = 0; i < g.sodinh; i++)
         for (int j = 0; j < g.sodinh; j++)
@@ -87,9 +78,7 @@ void NhapMaTranKe(GRAPH &g) {
 int main() {
     GRAPH g;
     NhapMaTranKe(g);
-
     XetLienThong(g);
-    InRaFile(g, "ketqua.txt");
-
+    InRaFile(g, "ketqua_lap02.txt");
     return 0;
 }
