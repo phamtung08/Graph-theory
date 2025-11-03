@@ -35,13 +35,13 @@ void XetLienThong(GRAPH &g) {
 void InRaFile(GRAPH g, const string &filename) {
     ofstream fo(filename);
     if (!fo) {
-        cout << "Khong mo duoc file de ghi!" << endl;
+        cout << "Không mở được file để ghi!" << endl;
         return;
     }
     if (nSoMienLienThong == 1)
-        fo << "LIEN THONG" << endl;
+        fo << "LIÊN THÔNG" << endl;
     else
-        fo << "KHONG LIEN THONG" << endl;
+        fo << "KHÔNG LIÊN THÔNG" << endl;
     fo << nSoMienLienThong << endl;
     vector<vector<int>> thanhphan(nSoMienLienThong + 1);
     for (int i = 0; i < g.sodinh; i++)
@@ -53,9 +53,8 @@ void InRaFile(GRAPH g, const string &filename) {
     }
     if (nSoMienLienThong > 1) {
         int canThem = nSoMienLienThong - 1;
-        fo << "Can them toi thieu " << canThem 
-           << " canh de do thi lien thong." << endl;
-        fo << "Cac canh can them: " << endl;
+        fo << "Cần thêm tối thiểu " << canThem << " cạnh để đồ thị liên thông." << endl;
+        fo << "Các cạnh cần thêm: " << endl;
         for (int i = 1; i < nSoMienLienThong; i++) {
             int u = thanhphan[i][0];
             int v = thanhphan[i + 1][0];
@@ -63,13 +62,13 @@ void InRaFile(GRAPH g, const string &filename) {
         }
     }
     fo.close();
-    cout << "Da ghi ket qua vao file '" << filename << "'." << endl;
+    cout << "Đã ghi kết quả vào file '" << filename << "'." << endl;
 }
 
 void NhapMaTranKe(GRAPH &g) {
-    cout << "Nhap so dinh: ";
+    cout << "Nhập số đỉnh: ";
     cin >> g.sodinh;
-    cout << "Nhap ma tran ke (" << g.sodinh << "x" << g.sodinh << "):\n";
+    cout << "Nhập ma trận kề (" << g.sodinh << "x" << g.sodinh << "):\n";
     for (int i = 0; i < g.sodinh; i++)
         for (int j = 0; j < g.sodinh; j++)
             cin >> g.A[i][j];
