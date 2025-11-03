@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <vector>
+#include <queue>
 using namespace std;
 
 #define MAX 100
@@ -14,12 +15,27 @@ struct GRAPH {
 int visited[MAX];
 int nSoMienLienThong = 0;
 
-
-void visit(GRAPH &g, int i, int nLabel) {
-    visited[i] = nLabel; 
-    for (int j = 0; j < g.sodinh; j++) {
-        if (visited[j] == 0 && g.A[i][j] != 0)
-            visit(g, j, nLabel);
+void visit(GRAPH &g, int i, int nLabel)
+{
+    int queue[MAX];     
+    int queuecount = 1;  
+    int queueindex = 0; 
+    int x;              
+    queue[0] = i;        
+    visited[i] = nLabel;
+    while (queueindex < queuecount)
+    {
+        x = queue[queueindex];
+        queueindex++;
+        for (int j = 0; j < g.sodinh; j++)
+        {
+            if ((visited[j] == 0) && (g.A[x][j] != 0))
+            {
+                queue[queuecount] = j;
+                queuecount++;
+                visited[j] = nLabel;
+            }
+        }
     }
 }
 
